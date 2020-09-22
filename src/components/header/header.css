@@ -1,0 +1,143 @@
+.header_link-wrapp {
+    display: flex;
+    align-items: center;
+}
+
+.header_item {
+    list-style: none;
+}
+
+.header_logo-text {
+    font-size: 95%;
+}
+
+.header_list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 3% auto;
+}
+
+.header_link {
+    text-decoration: none;
+    color: #000;
+}
+
+.header_button {
+    height: 50px;
+    width: 150px;
+    border-radius: 40px;
+    outline: none;
+}
+
+.sign-up {
+    width: 500px;
+    padding: 10px;
+    margin: auto;
+    border:  1px solid #1877F2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.sign-up-heading {
+    text-transform: capitalize;
+    font-size: 36px;
+}
+
+.sign-up-social {
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    width: 70%;
+    margin: auto;
+    font-weight: 700;
+    font-size: 1vw;
+}
+
+
+.sign-up-social-facebook {
+    background-color: #1877F2;
+    padding: 10px;
+    border-radius: 20px;
+    width: 90%;
+}
+
+.sign-up-social-linkedin {
+    background-color: #0E76A8;
+    padding: 10px;
+    border-radius: 20px;
+    width: 90%;
+}
+.sign-up-social-google {
+    background-color: #EA4335;
+    padding: 10px;
+    border-radius: 20px;
+    width: 90%;
+}
+
+.signup-paragraph {
+    position: relative;
+}
+.signup-paragraph::before {
+    position: absolute;
+    content: '';
+    height: 1px;
+    width: 40%;
+    left: 5%;
+    top: 50%;
+    background-color: #000;
+}
+
+.signup-paragraph::after {
+    position: absolute;
+    content: '';
+    height: 1px;
+    width: 40%;
+    right: 5%;
+    top: 50%;
+    background-color: #000;
+}
+
+.header-mail-button {
+    width: 50%;
+    padding: 10px;
+    border-radius: 25px;
+    outline: none;
+    font-size: 1.2vw;
+    margin: auto;
+}
+.header-mail-button-active {
+    background-color: #1DCE14;
+    color: white;
+    font-size: 2vw;
+    font-weight: 700;
+    padding: 5px;
+    width: 100%;
+    margin: auto;
+    border-radius: 25px;
+    outline: none;
+}
+
+.header-input {
+    display: none;
+    width: 70%;
+    margin: 2% auto;
+    padding: 10px;
+    background-color: #E8E8E8;
+    border-radius: 25px;
+    outline: none;
+}
+
+.header-input-active {
+    display: block;
+    margin: 2% auto;
+    padding: 10px;
+    width: 90%;
+    background-color: #E8E8E8;
+    border-radius: 25px;
+    outline: none;
+}
