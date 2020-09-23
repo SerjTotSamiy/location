@@ -9,15 +9,22 @@ export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            condition: true
+            condition: true,
+            sign: true,
         }
         this.changeButton = this.changeButton.bind(this)
+        this.changeSign = this.changeSign.bind(this)
     }
 
   changeButton() {
      this.setState(prevState => ({
          condition: !prevState.condition
      }));
+  }
+  changeSign() {
+        this.setState(prevSign => ({
+            sign: !prevSign.sign
+        }))
   }
     render() {
         return <header className={'header'}>
@@ -56,33 +63,36 @@ export default class Header extends Component {
                             FAQ
                         </a>
                     </li>
-                    <button className={'header_button'}>
+                    <button className={'header_button'} onClick={this.changeSign}>
                         Sign Up
                     </button>
                 </ul>
             </nav>
-            <div className={'sign-up'} id={'signup'}>
-                <img src={logo} alt={'header_logo'} className={'header-logo'}/>
-                <h2 className={'sign-up-heading'}>Login to your account</h2>
-                <a className={'sign-up-social'} href={'#'}>
-                    <img src={Facebook} alt={'header_logo'} className={'header-logo'}/>
-                    <p className={'sign-up-social-facebook'}>Continue with Facebook</p>
-                </a>
-                <a className={'sign-up-social'} href={'#'}>
-                    <img src={Linkdein} alt={'header_logo'} className={'header-logo'}/>
-                    <p className={'sign-up-social-linkedin'}>Continue with Linkedin</p>
-                </a>
-                <a className={'sign-up-social'} href={'#'}>
-                    <img src={Google} alt={'header_logo'} className={'header-logo'}/>
-                    <p className={'sign-up-social-google'}>Continue with Google</p>
-                </a>
-                <p className={'signup-paragraph'}>or</p>
-                <input type={'text'} className={this.state.condition ? 'header-input': 'header-input-active'} placeholder={'Please text your mail'}/>
-                <button onClick={this.changeButton}  className={this.state.condition ? 'header-mail-button': 'header-mail-button-active'}>
-                    {this.state.condition ? 'Use mail': 'Log in'}
-                </button>
-                <p>Don’t have an account? <a href={'#signup'}>Sign Up</a></p>
+            <div className={this.state.sign ? 'sign-up-wrapper': 'sign-up-show'}>
+                <div className={'sign-up'} id={'signup'}>
+                    <img src={logo} alt={'header_logo'} className={'header-logo'}/>
+                    <h2 className={'sign-up-heading'}>Login to your account</h2>
+                    <a className={'sign-up-social'} href={'#'}>
+                        <img src={Facebook} alt={'header_logo'} className={'header-logo'}/>
+                        <p className={'sign-up-social-facebook'}>Continue with Facebook</p>
+                    </a>
+                    <a className={'sign-up-social'} href={'#'}>
+                        <img src={Linkdein} alt={'header_logo'} className={'header-logo'}/>
+                        <p className={'sign-up-social-linkedin'}>Continue with Linkedin</p>
+                    </a>
+                    <a className={'sign-up-social'} href={'#'}>
+                        <img src={Google} alt={'header_logo'} className={'header-logo'}/>
+                        <p className={'sign-up-social-google'}>Continue with Google</p>
+                    </a>
+                    <p className={'signup-paragraph'}>or</p>
+                    <input type={'text'} className={this.state.condition ? 'header-input': 'header-input-active'} placeholder={'Please text your mail'}/>
+                    <button onClick={this.changeButton}  className={this.state.condition ? 'header-mail-button': 'header-mail-button-active'}>
+                        {this.state.condition ? 'Use mail': 'Log in'}
+                    </button>
+                    <p>Don’t have an account? <a href={'#signup'}>Sign Up</a></p>
+                </div>
             </div>
+
         </header>
     }
     }
