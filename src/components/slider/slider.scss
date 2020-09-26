@@ -1,0 +1,15 @@
+.carousel {
+  width: 350px;
+  height: 250px;
+  margin: auto;
+  border: 1px solid rebeccapurple;
+  background-color: red;
+  overflow: hidden;
+  &_container {
+    width: fit-content;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
