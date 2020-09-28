@@ -1,27 +1,44 @@
 import React, {Component} from "react";
 import './slider.scss'
-import Slide from "./slide/slide";
+import BathRoom from '../../images/slider-images/bathroom.png'
+import Reminder from '../../images/svg/reminder.svg'
+import {YMaps, Map} from "react-yandex-maps";
 
 export default class Slider extends Component{
     constructor(props) {
         super(props);
 
         this.state = {
-            current_card: 1,
+            current_card: 0,
+            textCondition: true,
+            condition: true,
+            areaCondition: true,
+        }
+    }
+    componentDidMount() {
+        if(this.state.current_card === 0) {
+            this.button_prev.style.display = 'none'
+        }
+        if(this.state.current_card > 0 ) {
+            this.button_prev.style.display = 'inline-block'
         }
     }
 
-    componentDidMount() {
-        let firs_slide_clone = this.carousel_container.children[0].cloneNode(true)
-        let last_slide_clone = this.carousel_container.children[this.carousel_container.children.length - 1 ].cloneNode(true)
-
-        this.carousel_container.insertBefore(last_slide_clone, this.carousel_container.children[0])
-        this.carousel_container.append(firs_slide_clone);
-
-        this.carousel_container.style.transitionDuration = '0s'
-        this.carousel_container.style.transform = `translate(-${350}px)`
+    showCarouselText() {
+        this.setState(prevCondition =>({
+            textCondition: !prevCondition.textCondition
+        }))
     }
-
+    showText() {
+        this.setState(nextConditon => ({
+            condition: !nextConditon.condition
+        }))
+    }
+    showArea() {
+        this.setState(nextArea => ({
+            areaCondition: !nextArea.areaCondition
+        }))
+    }
 next () {
         if(this.state.current_card < this.carousel_container.children.length - 1) {
             this.new_current_card = this.state.current_card + 1;
@@ -29,19 +46,14 @@ next () {
                 current_card: this.new_current_card
             }, () => {
                 this.carousel_container.style.transitionDuration = '0.5s'
-                this.carousel_container.style.transform = `translate(-${350 * this.state.current_card}px)`
+                this.carousel_container.style.transform = `translate(-${1000 * this.state.current_card}px)`
             })
         }
-        if(this.state.current_card === this.carousel_container.children.length - 1) {
-            let next_button = document.querySelector('.carousel_button-next');
-            next_button.classList.display ='none'
-            setTimeout(() => {
-                this.carousel_container.style.transitionDuration = '0s'
-                this.carousel_container.style.transform = `translate(-${350}px)`
-                this.setState({
-                    current_card: 1
-                })
-            },0)
+        if(this.state.current_card > 0) {
+            this.button_prev.style.display = 'inline-block'
+        }
+        if(this.state.current_card ===  this.carousel_container.children.length - 2) {
+            this.button_next.style.display = 'none'
         }
     }
     prev () {
@@ -51,32 +63,161 @@ next () {
                 current_card: this.new_current_card
             }, () => {
                 this.carousel_container.style.transitionDuration = '0.5s'
-                this.carousel_container.style.transform = `translate(-${350 * (this.state.current_card)}px)`
+                this.carousel_container.style.transform = `translate(-${1000 * (this.state.current_card)}px)`
             })
         }
-        if(this.state.current_card === 0) {
-            setTimeout(() => {
-                this.carousel_container.style.transitionDuration = '0s'
-                this.carousel_container.style.transform = `translate(-${350 * (this.carousel_container.children.length - 2)}px)`
-                this.setState({
-                    current_card: this.carousel_container.children.length - 2
-                })
-            },0)
+        if(this.state.current_card === this.carousel_container.children.length - 1) {
+            this.button_next.style.display = 'inline-block'
+        }
+        if(this.state.current_card === 1) {
+            this.button_prev.style.display = 'none'
         }
     }
     render() {
         return <section>
-            <button className={'carousel_button-next'} onClick={this.prev.bind(this)} >Prev</button>
+            <button ref={ref_id => this.button_prev = ref_id} className={'carousel_button-next'} onClick={this.prev.bind(this)} >&#8249;</button>
             <div className={'carousel'}>
                 <div ref={ref_id => this.carousel_container = ref_id} className={'carousel_container'}>
-                    <div className={'carousel_slide'}> hello</div>
-                    <Slide slide_number = '2'/>
-                    <Slide slide_number = '3'/>
-                    <Slide slide_number = '4'/>
-                    <Slide slide_number = '5'/>
+                    <div className={'carousel_slide'}>
+                        <div className={'carousel_map'}>
+                            <YMaps>
+                                <div style = {{width: '100%', height: '100%',position:'relative'}} >
+                                    <Map width ='100%' height = '100%'  defaultState={{ center: [37.3382, -121.8863], zoom: 11, }} />
+                                </div>
+                            </YMaps>
+                        </div>
+                    </div>
+                    <div className={'carousel_slide'}>
+                        <div className={'carousel_slide-wrapper'}>
+                            <div className={'carousel_picture'}>
+                                <img src={BathRoom} alt={'bathroom'} className={'carousel_bathroom'}/>
+                                <span className={'carousel_span'}><img src={Reminder} alt={'reminder'} onClick={this.showCarouselText.bind(this)}/></span>
+                                <div className={this.state.textCondition ? 'carousel_span-text' : 'carousel_span-text-active'}>
+                                    <h3>Example</h3>
+                                    <p>Лучше, чтобы фото были такими:</p>
+                                    <img className={'carousel_span-img'} alt={'carousel-span-img'}/>
+                                </div>
+                            </div>
+                            <div className={'carousel_overview'}>
+                                <h2>Overview</h2>
+                                <select className={'carousel_select'}>
+                                    <option>looll</option>
+                                    <option>looll</option>
+                                    <option>looll</option>
+                                    <option>looll</option>
+                                </select>
+                                <div className={'carousel_text'}>
+                                    <p>Просто скажите пару слов о своём доме.</p>
+                                    <p>Какая тут атмосфера? Какие люди?</p>
+                                    <textarea className={this.state.areaCondition? 'carousel_textarea' : 'carousel_textarea-bigger'} onClick={this.showArea.bind(this)}></textarea>
+                                    <p>Чаще всего нам задают такие вопросы:</p>
+                                    <p>- а рядом есть спортзал?</p>
+                                    <p>- что насчёт школ рядом?</p>
+                                    <p>- что с общественным транспортом?</p>
+                                    <p>- рядом есть парк/озеро?</p>
+                                </div>
+                            </div>
+                            <span className={'carousel_span'}><img src={Reminder} alt={'reminder'} onMouseUp={this.showText.bind(this)}/></span>
+                            <div className={this.state.condition ? 'carousel_example' : 'carousel_example-active'} >
+                                <h3>Example</h3>
+                                <p>More than a house, we are a startup founders community. We host entrepreneurs, but also engineers and students who want to start their own business. Live, learn and achieve, while getting the full Silicon Valley experience! </p>
+                                <p>Spacious, cheerful, sunny rooms of a large house in Atherton, professionally cleaned daily.</p>
+                                <p>Upon booking, please introduce yourself, thanks and welcome to our community!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={'carousel_slide'}>
+                        <h2>Badrooms</h2>
+                        <div className={'carousel_slide-wrapper'}>
+                            <figure className={'carousel_figure'}>
+                                <img src={BathRoom} alt={'bathroom'} />
+                                <figcaption className={'carousel_caption'}></figcaption>
+                                <span className={'carousel_figure_span'}>1800/month</span>
+                            </figure>
+                            <figure className={'carousel_figure'}>
+                                <img src={BathRoom} alt={'bathroom'} />
+                                <figcaption className={'carousel_caption'}>	&#9733; Private</figcaption>
+                                <span className={'carousel_figure_span'}>1800/month</span>
+                            </figure>
+                            <div className={'carousel_addPhotos'}>
+                                <button className={'carousel_plus'}>&#43;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={'carousel_slide'}>
+                        <div className={'carousel_slide-wrapper'}>
+                            <div className={'carousel_rules'}>
+                                <h2 className={'carousel_rules-heading'}>Rules</h2>
+                                <p>Какие правила вы хотите, чтобы действовали в вашем Startup House?</p>
+                                <p>Чаще всего правила регулируют такие темы, как:</p>
+                                <p>- можно ли курить?</p>
+                                <p>- а можно держать в доме животных?</p>
+                                <p>- а можно с маленькими детьми?</p>
+                                <p>- что насчёт шумных вечеринок?</p>
+                                <span className={'carousel_span'}><img src={Reminder} alt={'reminder'}/></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={'carousel_slide'}>
+                        <div className={'carousel_slide-wrapper'}>
+                            <div className={'carousel_address'}>
+                                <h2>Address</h2>
+                                <YMaps>
+                                    <div style = {{width: '100%', height: '100%',position:'relative'}} className={'carousel_map'}>
+                                        <Map width ='100%' height = '100%'  defaultState={{ center: [37.3382, -121.8863], zoom: 11, }} />
+                                    </div>
+                                </YMaps>
+                            </div>
+                            <div className={'carousel_overview-next'}>
+                                <h2>Overview</h2>
+                                <select className={'carousel_select'}>
+                                    <option>1500 ft</option>
+                                    <option>1500 ft</option>
+                                    <option>1500 ft</option>
+                                    <option>1500 ft</option>
+                                </select>
+                                <p>More than a house, we are a startup founders community. We host entrepreneurs, but also engineers and students who want to start their own business. Live, learn and achieve, while getting the full Silicon Valley experience!</p>
+                                <p> Spacious, cheerful, sunny rooms of a large house in Atherton, professionally cleaned daily.</p>
+                                <p>Upon booking, please introduce yourself, thanks and welcome to our community!</p>
+                            </div>
+                        </div>
+                        <div className={'carousel_slide-wrapper'}>
+                            <figure className={'carousel_figure'}>
+                                <img src={BathRoom} alt={'bathroom'} />
+                                <figcaption className={'carousel_caption'}></figcaption>
+                                <span className={'carousel_figure_span'}>1800/month</span>
+                            </figure>
+                            <figure className={'carousel_figure'}>
+                                <img src={BathRoom} alt={'bathroom'} />
+                                <figcaption className={'carousel_caption'}>	&#9733; Private</figcaption>
+                                <span className={'carousel_figure_span'}>1800/month</span>
+                            </figure>
+                            <div className={'carousel_addPhotos'}>
+                                <button className={'carousel_plus'}>&#43;</button>
+                            </div>
+                        </div>
+                        <div className={'carousel_slide'}>
+                            <h2>Badrooms</h2>
+                            <div className={'carousel_slide-wrapper'}>
+                                <figure className={'carousel_figure'}>
+                                    <img src={BathRoom} alt={'bathroom'} />
+                                    <figcaption className={'carousel_caption'}></figcaption>
+                                    <span className={'carousel_figure_span'}>1800/month</span>
+                                </figure>
+                                <figure className={'carousel_figure'}>
+                                    <img src={BathRoom} alt={'bathroom'} />
+                                    <figcaption className={'carousel_caption'}>	&#9733; Private</figcaption>
+                                    <span className={'carousel_figure_span'}>1800/month</span>
+                                </figure>
+                                <div className={'carousel_addPhotos'}>
+                                    <button className={'carousel_plus'}>&#43;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <button className={'carousel_button-prev'} onClick={this.next.bind(this)}>next</button>
+            <button ref={ref_id => this.button_next = ref_id} className={'carousel_button-prev'} onClick={this.next.bind(this)}>&#8250;</button>
         </section>
     }
 }
