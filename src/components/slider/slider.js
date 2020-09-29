@@ -3,6 +3,11 @@ import './slider.scss'
 import BathRoom from '../../images/slider-images/bathroom.png'
 import Reminder from '../../images/svg/reminder.svg'
 import {YMaps, Map} from "react-yandex-maps";
+import House1 from '../../images/slider-images/house1.png'
+import House2 from '../../images/slider-images/house2.png'
+import House3 from '../../images/slider-images/house3.png'
+import House4 from '../../images/slider-images/house4.png'
+import House5 from '../../images/slider-images/house5.png'
 
 export default class Slider extends Component{
     constructor(props) {
@@ -39,7 +44,7 @@ export default class Slider extends Component{
             areaCondition: !nextArea.areaCondition
         }))
     }
-next () {
+    next () {
         if(this.state.current_card < this.carousel_container.children.length - 1) {
             this.new_current_card = this.state.current_card + 1;
             this.setState({
@@ -49,7 +54,7 @@ next () {
                 this.carousel_container.style.transform = `translate(-${1000 * this.state.current_card}px)`
             })
         }
-        if(this.state.current_card > 0) {
+        if(this.state.current_card === 0) {
             this.button_prev.style.display = 'inline-block'
         }
         if(this.state.current_card ===  this.carousel_container.children.length - 2) {
@@ -78,16 +83,14 @@ next () {
             <button ref={ref_id => this.button_prev = ref_id} className={'carousel_button-next'} onClick={this.prev.bind(this)} >&#8249;</button>
             <div className={'carousel'}>
                 <div ref={ref_id => this.carousel_container = ref_id} className={'carousel_container'}>
-                    <div className={'carousel_slide'}>
-                        <div className={'carousel_map'}>
+                    <div className={'carousel_slide-block'}>
                             <YMaps>
-                                <div style = {{width: '100%', height: '100%',position:'relative'}} >
+                                <div style = {{width: '100%', height: '100%',position:'relative'}} className={'carousel_map'} >
                                     <Map width ='100%' height = '100%'  defaultState={{ center: [37.3382, -121.8863], zoom: 11, }} />
                                 </div>
                             </YMaps>
-                        </div>
                     </div>
-                    <div className={'carousel_slide'}>
+                    <div className={'carousel_slide-block'}>
                         <div className={'carousel_slide-wrapper'}>
                             <div className={'carousel_picture'}>
                                 <img src={BathRoom} alt={'bathroom'} className={'carousel_bathroom'}/>
@@ -126,7 +129,7 @@ next () {
                             </div>
                         </div>
                     </div>
-                    <div className={'carousel_slide'}>
+                    <div className={'carousel_slide-block'}>
                         <h2>Badrooms</h2>
                         <div className={'carousel_slide-wrapper'}>
                             <figure className={'carousel_figure'}>
@@ -144,7 +147,7 @@ next () {
                             </div>
                         </div>
                     </div>
-                    <div className={'carousel_slide'}>
+                    <div className={'carousel_slide-block'}>
                         <div className={'carousel_slide-wrapper'}>
                             <div className={'carousel_rules'}>
                                 <h2 className={'carousel_rules-heading'}>Rules</h2>
@@ -181,22 +184,17 @@ next () {
                                 <p>Upon booking, please introduce yourself, thanks and welcome to our community!</p>
                             </div>
                         </div>
-                        <div className={'carousel_slide-wrapper'}>
-                            <figure className={'carousel_figure'}>
-                                <img src={BathRoom} alt={'bathroom'} />
-                                <figcaption className={'carousel_caption'}></figcaption>
-                                <span className={'carousel_figure_span'}>1800/month</span>
-                            </figure>
-                            <figure className={'carousel_figure'}>
-                                <img src={BathRoom} alt={'bathroom'} />
-                                <figcaption className={'carousel_caption'}>	&#9733; Private</figcaption>
-                                <span className={'carousel_figure_span'}>1800/month</span>
-                            </figure>
-                            <div className={'carousel_addPhotos'}>
-                                <button className={'carousel_plus'}>&#43;</button>
-                            </div>
+                        <div className={'carousel_slide-photos'}>
+                                <h2>Photos of the house</h2>
+                                <div className={'carousel_slide-wrapper'}>
+                                    <img src={House1} alt = {'house1'}/>
+                                    <img src={House2} alt = {'house2'}/>
+                                    <img src={House3} alt = {'house3'}/>
+                                    <img src={House4} alt = {'house4'}/>
+                                    <img src={House5} alt = {'house5'}/>
+                                </div>
                         </div>
-                        <div className={'carousel_slide'}>
+                        <div className={'carousel_slide-wrapper'}>
                             <h2>Badrooms</h2>
                             <div className={'carousel_slide-wrapper'}>
                                 <figure className={'carousel_figure'}>
