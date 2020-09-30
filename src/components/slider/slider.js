@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import './slider.scss'
+import Amenities from "../amenities/amenities";
 import BathRoom from '../../images/slider-images/bathroom.png'
 import Reminder from '../../images/svg/reminder.svg'
-import {YMaps, Map} from "react-yandex-maps";
+import {YMaps, Map, Placemark} from "react-yandex-maps";
 import House1 from '../../images/slider-images/house1.png'
 import House2 from '../../images/slider-images/house2.png'
 import House3 from '../../images/slider-images/house3.png'
@@ -19,6 +20,7 @@ export default class Slider extends Component{
             condition: true,
             areaCondition: true,
         }
+
     }
     componentDidMount() {
         if(this.state.current_card === 0) {
@@ -79,6 +81,13 @@ export default class Slider extends Component{
         }
     }
     render() {
+        const mapData = {
+            center: [37.3382, -121.8863],
+            zoom: 11,
+        };
+        const coordinates = [
+            [37.3382, -121.8863],
+        ];
         return <section>
             <button ref={ref_id => this.button_prev = ref_id} className={'carousel_button-next'} onClick={this.prev.bind(this)} >&#8249;</button>
             <div className={'carousel'}>
@@ -86,7 +95,8 @@ export default class Slider extends Component{
                     <div className={'carousel_slide-block'}>
                             <YMaps>
                                 <div style = {{width: '100%', height: '100%',position:'relative'}} className={'carousel_map'} >
-                                    <Map width ='100%' height = '100%'  defaultState={{ center: [37.3382, -121.8863], zoom: 11, }} />
+                                    <Map width ='100%' height = '100%'  defaultState={mapData}>{coordinates.map(coordinate => <Placemark geometry={coordinate} />)}
+                                    </Map>
                                 </div>
                             </YMaps>
                     </div>
@@ -129,23 +139,12 @@ export default class Slider extends Component{
                             </div>
                         </div>
                     </div>
-                    <div className={'carousel_slide-block'}>
+                    <div className={'carousel_slide'}>
                         <h2>Badrooms</h2>
-                        <div className={'carousel_slide-wrapper'}>
-                            <figure className={'carousel_figure'}>
-                                <img src={BathRoom} alt={'bathroom'} />
-                                <figcaption className={'carousel_caption'}></figcaption>
-                                <span className={'carousel_figure_span'}>1800/month</span>
-                            </figure>
-                            <figure className={'carousel_figure'}>
-                                <img src={BathRoom} alt={'bathroom'} />
-                                <figcaption className={'carousel_caption'}>	&#9733; Private</figcaption>
-                                <span className={'carousel_figure_span'}>1800/month</span>
-                            </figure>
-                            <div className={'carousel_addPhotos'}>
-                                <button className={'carousel_plus'}>&#43;</button>
-                            </div>
+                        <div className={'carousel_addPhotos'}>
+                            <button className={'carousel_plus'}>&#43;</button>
                         </div>
+                        <Amenities/>
                     </div>
                     <div className={'carousel_slide-block'}>
                         <div className={'carousel_slide-wrapper'}>
@@ -196,7 +195,10 @@ export default class Slider extends Component{
                         </div>
                         <div className={'carousel_slide-wrapper'}>
                             <h2>Badrooms</h2>
-                            <div className={'carousel_slide-wrapper'}>
+                            <div className={'carousel_addPhotos'}>
+                                <button className={'carousel_plus'}>&#43;</button>
+                            </div>
+                            {/*<div className={'carousel_slide-wrapper'}>
                                 <figure className={'carousel_figure'}>
                                     <img src={BathRoom} alt={'bathroom'} />
                                     <figcaption className={'carousel_caption'}></figcaption>
@@ -207,10 +209,8 @@ export default class Slider extends Component{
                                     <figcaption className={'carousel_caption'}>	&#9733; Private</figcaption>
                                     <span className={'carousel_figure_span'}>1800/month</span>
                                 </figure>
-                                <div className={'carousel_addPhotos'}>
-                                    <button className={'carousel_plus'}>&#43;</button>
-                                </div>
-                            </div>
+
+                            </div>*/}
                         </div>
                     </div>
                 </div>

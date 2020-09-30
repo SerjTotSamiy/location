@@ -1,17 +1,19 @@
 .carousel {
   width: 1000px;
-  height: auto;
   margin: auto;
   overflow: hidden;
   &_slide {
     width: 1000px;
-    height: 40vh;
     box-sizing: border-box;
     font-size: 1vw;
     color: black;
-    padding: 10px;
+    padding: 20px;
     text-align: left;
-    overflow: hidden auto;
+    height: 50vh;
+    transition:  ease .3s;
+    &:hover {
+      height: auto;
+    }
   }
   &_slide-block {
     width: 1000px;
@@ -48,7 +50,6 @@
   }
   &_button-next {
     left: 0;
-    //display: none;
   }
   &_button-prev {
     right: 0;
@@ -113,12 +114,14 @@
   &_textarea {
     width: 10vw;
     height: 5vh;
+    resize: none;
     &-bigger {
       width: 30vw;
       height: 20vh;
       border-radius: 40px;
       outline: none;
       padding: 20px;
+      resize: none;
     }
   }
   &_figure {
