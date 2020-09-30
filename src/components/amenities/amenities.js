@@ -107,44 +107,8 @@ export default class Amenities extends Component {
             </div>
             <div className={'amenities-custom'}>
                 <h3 className={'amenities-heading3'}>Custom amenities</h3>
-                <div className={'amenities-wrapper'}>
-                    <div className={'amenities-custom-block'}>
-                        <input type={'text'} placeholder={'please enter your custom'} className={'custom-input'}/>
-                        <button className={'amenities-button'}><img src={Crist}/></button>
-                    </div>
-                    <div className={'amenities-custom-block'}>
-                        <input type={'text'} placeholder={'please enter your custom'} className={'custom-input'}/>
-                        <button className={'amenities-button'}><img src={Crist}/></button>
-                    </div>
-                    <div className={'amenities-custom-block'}>
-                        <input type={'text'} placeholder={'please enter your custom'} className={'custom-input'}/>
-                        <button className={'amenities-button'}><img src={Crist}/></button>
-                    </div>
-                    <div className={'amenities-custom-block'}>
-                        <input type={'text'} placeholder={'please enter your custom'} className={'custom-input'}/>
-                        <button className={'amenities-button'}><img src={Crist}/></button>
-                    </div>
-                    <div className={'amenities-custom-block'}>
-                        <input type={'text'} placeholder={'please enter your custom'} className={'custom-input'}/>
-                        <button className={'amenities-button'}><img src={Crist}/></button>
-                    </div>
-                    <div className={'amenities-custom-block'}>
-                        <input type={'text'} placeholder={'please enter your custom'} className={'custom-input'}/>
-                        <button className={'amenities-button'}><img src={Crist}/></button>
-                    </div>
-                </div>
+                <input type={'text'} className={'amenities-text'}/>
             </div>
-            <div className={'rules'}>
-                <h2 className={'rules-heading'}>Rules</h2>
-                <ul className={'rules-list'}>
-                    <li className={'rules-item'}>no suitable for children and infants</li>
-                    <li className={'rules-item'}>no smoking</li>
-                    <li className={'rules-item'}>no pets</li>
-                    <li className={'rules-item'}>no parties or events</li>
-                    <li className={'rules-item'}>check-in is anytime after 3PM</li>
-                </ul>
-            </div>
-            <button className={'amenities-bottom-button'}>Create Startup House!</button>
         </section>
     }
 }

@@ -19,6 +19,7 @@ export default class Slider extends Component{
             textCondition: true,
             condition: true,
             areaCondition: true,
+            currentValue: 0,
         }
 
     }
@@ -30,7 +31,30 @@ export default class Slider extends Component{
             this.button_prev.style.display = 'inline-block'
         }
     }
-
+    /*addTexforInput(elem) {
+        if(elem.value === '') {
+            return ''
+        }else  {
+            return elem.innerText = elem.value;
+        }
+    }*/
+    increaseValue() {
+        this.new_currentValue = this.state.currentValue + 1
+        this.setState({
+            currentValue: this.new_currentValue
+        })
+    }
+    decreaseValue() {
+        this.new_currentValue = this.state.currentValue - 1
+        this.setState({
+            currentValue: this.new_currentValue
+        })
+        if(this.state.currentValue === 0) {
+            this.setState({
+                currentValue: 0
+            })
+        }
+    }
     showCarouselText() {
         this.setState(prevCondition =>({
             textCondition: !prevCondition.textCondition
@@ -49,6 +73,13 @@ export default class Slider extends Component{
     next () {
         if(this.state.current_card < this.carousel_container.children.length - 1) {
             this.new_current_card = this.state.current_card + 1;
+            const carusel = document.querySelector('.carousel_slide')
+            if (this.state.current_card === 1 || this.state.current_card === 3){
+                carusel.style.height = 'auto'
+            }
+            else {
+               carusel.style.height = '50vh'
+            }
             this.setState({
                 current_card: this.new_current_card
             }, () => {
@@ -65,7 +96,15 @@ export default class Slider extends Component{
     }
     prev () {
         if(this.state.current_card > 0) {
+             console.log(this.state.current_card)
             this.new_current_card = this.state.current_card - 1;
+             let carusel = document.querySelector('.carousel_slide')
+             if (this.state.current_card === 3){
+                carusel.style.height = 'auto'
+             }
+            else {
+               carusel.style.height = '50vh'
+             }
             this.setState({
                 current_card: this.new_current_card
             }, () => {
@@ -113,12 +152,7 @@ export default class Slider extends Component{
                             </div>
                             <div className={'carousel_overview'}>
                                 <h2>Overview</h2>
-                                <select className={'carousel_select'}>
-                                    <option>looll</option>
-                                    <option>looll</option>
-                                    <option>looll</option>
-                                    <option>looll</option>
-                                </select>
+                                <input className={'carousel_overview_input'}/>
                                 <div className={'carousel_text'}>
                                     <p>Просто скажите пару слов о своём доме.</p>
                                     <p>Какая тут атмосфера? Какие люди?</p>
@@ -144,6 +178,12 @@ export default class Slider extends Component{
                         <div className={'carousel_addPhotos'}>
                             <button className={'carousel_plus'}>&#43;</button>
                         </div>
+                        <div className={'carousel_chooseBathrooms'}>
+                            <h1>Bathrooms</h1>
+                            <button className={'carousel_decrease'} onClick={this.decreaseValue.bind(this)}>&minus;</button>
+                            <input value={this.state.currentValue}/>
+                            <button ref = {ref_id => this.carousel_increase =ref_id} className={'carousel_increase'} onClick={this.increaseValue.bind(this)}>&#43;</button>
+                        </div>
                         <Amenities/>
                     </div>
                     <div className={'carousel_slide-block'}>
@@ -165,7 +205,7 @@ export default class Slider extends Component{
                             <div className={'carousel_address'}>
                                 <h2>Address</h2>
                                 <YMaps>
-                                    <div style = {{width: '100%', height: '100%',position:'relative'}} className={'carousel_map'}>
+                                    <div className={'carousel_map'}>
                                         <Map width ='100%' height = '100%'  defaultState={{ center: [37.3382, -121.8863], zoom: 11, }} />
                                     </div>
                                 </YMaps>
@@ -198,20 +238,8 @@ export default class Slider extends Component{
                             <div className={'carousel_addPhotos'}>
                                 <button className={'carousel_plus'}>&#43;</button>
                             </div>
-                            {/*<div className={'carousel_slide-wrapper'}>
-                                <figure className={'carousel_figure'}>
-                                    <img src={BathRoom} alt={'bathroom'} />
-                                    <figcaption className={'carousel_caption'}></figcaption>
-                                    <span className={'carousel_figure_span'}>1800/month</span>
-                                </figure>
-                                <figure className={'carousel_figure'}>
-                                    <img src={BathRoom} alt={'bathroom'} />
-                                    <figcaption className={'carousel_caption'}>	&#9733; Private</figcaption>
-                                    <span className={'carousel_figure_span'}>1800/month</span>
-                                </figure>
-
-                            </div>*/}
                         </div>
+                        <Amenities/>
                     </div>
                 </div>
             </div>
