@@ -3,7 +3,7 @@ import './App.css';
 /*import Header from "./components/header/header";
 import {BrowserRouter,} from "react-router-dom";
 import Slider from "./components/slider/slider";*/
-import Modal from "./components/modal/modal";
+import Modal from "./components/modalW/modal";
 
 function App() {
     return (

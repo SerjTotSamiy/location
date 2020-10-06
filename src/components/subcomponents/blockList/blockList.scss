@@ -1,0 +1,38 @@
+.block_list_block {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-left: 3%;
+  width: auto;
+}
+.block_list_wrapper {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.statusColor {
+  background-color: #1DCE14;
+  width: 40px;
+  height: 35px;
+  border-radius: 90%;
+  display: inline-block;
+}
+
+.block_list_status {
+  display: inherit;
+  align-items: center;
+  vertical-align: middle;
+}
+ .statusText {
+  margin-left: 10%;
+}
+.price {
+  margin-right: 10%;
+}
+.heart {
+  margin-left: 20%;
+  font-size: 40px;
+  cursor: pointer;
+  color: rebeccapurple;
+}

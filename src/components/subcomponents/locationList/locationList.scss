@@ -1,0 +1,10 @@
+.sortByResult {
+  display: flex;
+  flex-direction: column;
+  //width: 70%;
+  &_wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
