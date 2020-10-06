@@ -7,7 +7,6 @@ import Workspace from '../../images/svg/workspace.svg'
 import Other from '../../images/svg/other.svg'
 import Cleanless from '../../images/svg/cleanless.svg'
 import Kitchen from '../../images/svg/kitchen.svg'
-import Crist  from '../../images/svg/crist.svg'
 
 export default class Amenities extends Component {
     render() {
