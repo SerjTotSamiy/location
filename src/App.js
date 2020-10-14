@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
-/*import Header from "./components/header/header";
+import Header from "./components/header/header";
 import {BrowserRouter,} from "react-router-dom";
-import Slider from "./components/slider/slider";*/
-import Modal from "./components/modalW/modal";
+import Slider from "./components/slider/slider";
+// import Modal from "./components/modalW/modal";
 
 function App() {
     return (
         <div className="App">
-            {/*<BrowserRouter>
+            <BrowserRouter>
                 <Header/>
             </BrowserRouter>
-            <Slider/>*/}
-            <Modal/>
+            <Slider/>
+            {/*<Modal/>*/}
         </div>
     );
 }

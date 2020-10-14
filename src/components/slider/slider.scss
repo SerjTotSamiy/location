@@ -1,3 +1,18 @@
+.carousel-dots {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto 5%;
+  width: 40%;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #000000;
+  font-size: 1.4rem;
+}
+
 .carousel {
   width: 1000px;
   margin: auto;

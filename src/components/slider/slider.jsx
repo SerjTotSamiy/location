@@ -11,12 +11,13 @@ import House4 from '../../images/slider-images/house4.png'
 import House5 from '../../images/slider-images/house5.png'
 
 export default class Slider extends Component {
+
     constructor(props,) {
         super(props);
-         this.coordinates = [
+        this.coordinates = [
             [37.3382, -121.8863],
         ];
-         this.mapData = {
+        this.mapData = {
             center: [37.3382, -121.8863],
             zoom: 11,
         };
@@ -26,6 +27,7 @@ export default class Slider extends Component {
             textCondition: true,
             condition: true,
             areaCondition: true,
+            addClass: false,
         }
 
     }
@@ -57,10 +59,20 @@ export default class Slider extends Component {
         }))
     }
 
+    addColor() {
+        let dots = document.querySelectorAll('.dot')
+        dots.forEach((elem,index) => {
+            if (index === this.new_current_card) {
+                elem.style.backgroundColor = 'red'
+            }
+        })
+    }
+
     next() {
         if (this.state.current_card < this.carousel_container.children.length - 1) {
             this.new_current_card = this.state.current_card + 1;
             let carusel = document.querySelector('.carousel_slide')
+            this.addColor();
             if (this.state.current_card === 1) {
                 carusel.style.height = 'auto'
             } else if (this.state.current_card === 3) {
@@ -74,6 +86,7 @@ export default class Slider extends Component {
                 this.carousel_container.style.transitionDuration = '0.5s'
                 this.carousel_container.style.transform = `translate(-${1000 * this.state.current_card}px)`
             })
+
         }
         if (this.state.current_card === 0) {
             this.button_prev.style.display = 'inline-block'
@@ -109,18 +122,24 @@ export default class Slider extends Component {
     }
 
     render() {
-
-
         return <section>
             <button ref={ref_id => this.button_prev = ref_id} className={'carousel_button-next'}
                     onClick={this.prev.bind(this)}>&#8249;</button>
+            <div className={'carousel-dots'}>
+                <div className={'dot'}></div>
+                <div className={'dot'}></div>
+                <div className={'dot'}></div>
+                <div className={'dot'}></div>
+                <div className={'dot'}></div>
+            </div>
             <div className={'carousel'}>
                 <div ref={ref_id => this.carousel_container = ref_id} className={'carousel_container'}>
                     <div className={'carousel_slide-block'}>
                         <YMaps>
                             <div style={{width: '100%', height: '100%', position: 'relative'}}
                                  className={'carousel_map'}>
-                                <Map width='100%' height='100%' defaultState={this.mapData}>{this.coordinates.map(coordinate =>
+                                <Map width='100%' height='100%'
+                                     defaultState={this.mapData}>{this.coordinates.map(coordinate =>
                                     <Placemark geometry={coordinate}/>)}
                                 </Map>
                             </div>

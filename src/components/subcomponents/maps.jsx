@@ -5,10 +5,11 @@ export default class Maps extends Component {
         super(props);
         this.coordinates = [
             [37.3382, -121.8863],
+            [37.7782887, -122.4335263]
         ];
         this.mapData = {
             center: [37.3382, -121.8863],
-            zoom: 13,
+            zoom: 5,
         };
     }
     render() {

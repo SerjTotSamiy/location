@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, ReactDOM} from "react";
 import './amenities.css'
 import Parking from '../../images/svg/parking.svg'
 import Service from '../../images/svg/service.svg'
@@ -9,6 +9,41 @@ import Cleanless from '../../images/svg/cleanless.svg'
 import Kitchen from '../../images/svg/kitchen.svg'
 
 export default class Amenities extends Component {
+    constructor(props) {
+        super(props);
+        this.amenities_text = document.getElementsByClassName('amenities-text')
+        this.amenities_forInput = document.getElementsByClassName('amenities-forInput')
+        this.showText = []
+        this.state = {
+            value: '',
+            showValue: this.showText
+        }
+    }
+
+    addAmenities(e) {
+        this.setState({
+            value: e.target.value
+        })
+    }
+
+    addTextForInput() {
+        this.showText.push(<div className={'amenities-text'}>
+            {this.state.value}
+            <button onClick={this.removeAmenitiesText.bind(this)} className={'amenities-forInput'}>click my anus
+            </button>
+        </div>)
+        this.setState({
+            showValue: this.state.showText,
+            value: ''
+        })
+    }
+
+    removeAmenitiesText() {
+        this.showText.forEach((elem, index) => {
+
+        })
+    }
+
     render() {
         return <section className={'amenities'}>
             <h2 className={'amenities-heading'}>Amenities</h2>
@@ -106,7 +141,12 @@ export default class Amenities extends Component {
             </div>
             <div className={'amenities-custom'}>
                 <h3 className={'amenities-heading3'}>Custom amenities</h3>
-                <input type={'text'} className={'amenities-text'}/>
+                <input type={'text'} className={'amenities-text'} value={this.state.value}
+                       onChange={this.addAmenities.bind(this)}/>
+                <button onClick={this.addTextForInput.bind(this)}>click me</button>
+                <div className={'amenities-text'}>
+                    {this.showText}
+                </div>
             </div>
         </section>
     }
